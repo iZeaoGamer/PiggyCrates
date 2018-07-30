@@ -63,7 +63,7 @@ class DropsTask extends Task
         $player = $this->player;
         $item = $player->getInventory()->getItemInHand();
         if (!$this->startingTitleComplete) {
-            $player->addTitle("You Have Received");
+            $player->addTitle("§aYou have recieved:");
             $this->startingTitleComplete = true;
             return false;
         }
@@ -93,9 +93,11 @@ class DropsTask extends Task
             $cmd = str_replace(["%PLAYER%"], [$player->getName()], $cmd);
             $this->plugin->getServer()->dispatchCommand(new ConsoleCommandSender(), $cmd);
         }
+        $playerName = $player->getName();
         $this->items[] = $i;
         $player->addTitle("", "");
         $player->addTitle("", $values["amount"] . " " . $values["name"]);
+        $this->plugin->getServer()->broadcastMessage("§a$playerName §bhas opened a §3$type §bCrate §band has received: §d$this->items[]");
         $particles = "pocketmine\\level\\particle\\" . ucfirst($this->plugin->getCrateDropParticle($this->type)) . "Particle";
         if (class_exists($particles)) {
             $this->block->getLevel()->addParticle(new $particles($this->block->add(0, 2)));
