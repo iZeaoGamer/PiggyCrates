@@ -190,7 +190,7 @@ class EventListener implements Listener
                             }
                             $player->getInventory()->removeItem($item->setCount(1));
                             $player->getInventory()->addItem(...$items);
-                            $player->sendTip(TextFormat::GREEN . "You have received " . implode(", ", $list));
+                            $player->sendTip(TextFormat::GREEN . "§aYou have received §b" . implode(", ", $list));
                         } else {
                             $task = new DropsTask($this->plugin, $player, $block, $type, $drops, $pickedDrops);
                             $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task, 20);
