@@ -95,6 +95,7 @@ class DropsTask extends Task
         }
         $playerName = $player->getName();
         $pickedDrop = $this->pickedDrops;
+        $type = $this->type;
         $values = $this->drops[$pickedDrop];
         $i = Item::get($values["id"], $values["meta"], $values["amount"]);
         $player->addTitle("", "");
