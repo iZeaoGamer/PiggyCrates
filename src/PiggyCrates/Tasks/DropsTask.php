@@ -94,6 +94,7 @@ class DropsTask extends Task
             $this->plugin->getServer()->dispatchCommand(new ConsoleCommandSender(), $cmd);
         }
         $playerName = $player->getName();
+        $type = $this->drops;
         $this->items[] = $i;
         $player->addTitle("", "");
         $player->addTitle("", $values["amount"] . " " . $values["name"]);
