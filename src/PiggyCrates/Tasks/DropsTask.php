@@ -94,11 +94,12 @@ class DropsTask extends Task
             $this->plugin->getServer()->dispatchCommand(new ConsoleCommandSender(), $cmd);
         }
         $playerName = $player->getName();
-        $type = $this->drops;
-        $this->items[] = $i;
+        $pickedDrop = $this->pickedDrops;
+        $values = $this->drops[$pickedDrop];
+        $i = Item::get($values["id"], $values["meta"], $values["amount"]);
         $player->addTitle("", "");
         $player->addTitle("", $values["amount"] . " " . $values["name"]);
-        $this->plugin->getServer()->broadcastMessage("§a$playerName §bhas opened a §3$type §bCrate §band has received: §d$this->items[]");
+        $this->plugin->getServer()->broadcastMessage("§a$playerName §bhas opened a §3$type §bCrate §band has received: §d$pickedDrop");
         $particles = "pocketmine\\level\\particle\\" . ucfirst($this->plugin->getCrateDropParticle($this->type)) . "Particle";
         if (class_exists($particles)) {
             $this->block->getLevel()->addParticle(new $particles($this->block->add(0, 2)));
